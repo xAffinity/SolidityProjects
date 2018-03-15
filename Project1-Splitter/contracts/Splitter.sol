@@ -1,38 +1,47 @@
 pragma solidity ^0.4.19;
 
-contract Splitter {
+import "./Ownable.sol";
+
+contract Splitter is Ownable{
+
 	address owner;
 	uint256 sendAmount;
+
+	mapping (address => uint) public balances;
+
+	bool killStatus = false;
 	
-	address Bob;
-	address Carol;
-	/*Executes on contract deployement*/
-	function Splitter (address bobAddress, address carolAddress)  public {
-		owner = msg.sender;
-		Bob = bobAddress;
-		Carol = carolAddress;
-	}
-
-	/*Get Contract Balance*/
-	function contractBalance() public view returns (uint) {
-		return address(this).balance;
-	}
-
-	function  sendWei(address toWhom) public {
-		toWhom.transfer(sendAmount);
-	}
+	event LogSplit(address indexed sender,address indexed firstAddress, address indexed secondAddress, uint256 amount);
+	event LogWithdrawn(address indexed who, uint256 amount);
+	event LogKill(address owner, bool _killStatus);
 
 	/*Split Ether*/
-	function splitEther() public payable {
-		if(msg.value==0) revert();
+	function splitEther(address _firstAddress, address _secondAddress) public payable {
+		require(_firstAddress !=0);
+		require(_secondAddress !=0);
 		sendAmount = msg.value/2;
-		sendWei(Bob);
-		sendWei(Carol);
-		sendAmount = 0; //ensure people cannot sendWei 
-		//call sendfunction to two accounts
+		require(sendAmount>0);
+		balances[_firstAddress]+= sendAmount;
+		balances[_secondAddress]+=msg.value-sendAmount;
+		LogSplit(msg.sender,_firstAddress,_secondAddress,msg.value);
 	}
 
-	/*Allow Ether to be sent to contract*/
-	//may not need since u just need splitEther to get eth and split
-	//function() public payable {}
+	/*Allow address with balance on contract to withdraw their balance*/
+	function withdraw() public {
+		uint256 amount = balances[msg.sender];
+		require(amount >0);
+		balances[msg.sender]=0;
+		LogWithdrawn(msg.sender, amount);
+		msg.sender.transfer(amount);
+
+	}
+
+	/*Destroys contract - only allowed by owner*/
+	function kill() public onlyOwner returns (bool _killStatus){
+		selfdestruct(owner);
+		killStatus=true;
+		LogKill(owner, killStatus);
+		return killStatus;
+	}
+
 }
