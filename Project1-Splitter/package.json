@@ -35,6 +35,6 @@
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
-    "truffle-default-builder": "^2.0.0"
+    "truffle-default-builder": "^2.0.0",
   }
 }
