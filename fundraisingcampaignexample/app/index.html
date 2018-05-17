@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="." />
+  <title>Campaign</title>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" 
+      type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+      crossorigin="anonymous" />
+  
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <!-- Bootstrap Javascript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="./app.css" />
+
+  <!-- App Controller -->
+  <script src="./app.js"></script>
+</head>
+
+<!-- Bind the Web Page to the App Controller -->
+
+<body ng-cloak ng-controller="campaignController">
+  <h3>Hello World</h3>
+  <!-- Everything we do will go below here. -->
+
+
+
+  
+  <!-- Everything we do will go above here. -->
+
+  <!-- Wait for the document to load, then start the App Controller -->
+
+  <script>
+    window.addEventListener('load', function() {
+      angular.bootstrap(document, ['campaignApp']);
+    });
+  </script>
+
+</body>
+
+</html>
