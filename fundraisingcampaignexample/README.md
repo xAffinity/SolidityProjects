@@ -1,8 +1,4 @@
-## Contract Factory - April 2017
-
-This is the finished app that goes with the video series. 
-
-This example uses down-rev versions of the tools (we are working on that). In order to get it working without interfering with your other projects and latest tools, we suggest you perform this exercise on a dedicated virtual machine or vagrant box.
+## Campaign Example with Angular JS
 
 ### Works with
 
@@ -64,8 +60,6 @@ cd contractFactory2017
 ```
 $ npm install
 ```
-
-NOTE: Some students have reported strange errors when the windows are open randomly instead of as described here. 
 
 Open a new window and run a blockchain on port 8545
 
