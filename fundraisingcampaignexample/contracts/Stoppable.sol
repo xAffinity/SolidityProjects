@@ -1,4 +1,4 @@
-pragma solidity 0.4.19;
+pragma solidity ^0.4.6;
 
 import "./Owned.sol";
 
@@ -9,16 +9,15 @@ contract Stoppable is Owned {
     event LogRunSwitch(address sender, bool switchSetting);
         
     modifier onlyIfRunning { 
-        require(running); 
+        if(!running) throw; 
         _;
     }
         
-    function Stoppable() public {
+    function Stoppable() {
         running = true;
     }
         
     function runSwitch(bool onOff)
-        public
         onlyOwner
         returns(bool success)
     {

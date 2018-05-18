@@ -1,4 +1,4 @@
-pragma solidity 0.4.19;
+pragma solidity ^0.4.6;
 
 contract Owned {
     
@@ -7,20 +7,18 @@ contract Owned {
     event LogNewOwner(address sender, address oldOwner, address newOwner);
     
     modifier onlyOwner { 
-        require(msg.sender==owner);
+        if(msg.sender != owner) throw;
         _; 
     }
     
-    function Owned() public {
+    function Owned() {
         owner = msg.sender;
     }
     
     function changeOwner(address newOwner)
-        public
         onlyOwner
         returns(bool success)
     {
-        require(newOwner != 0);
         LogNewOwner(msg.sender, owner, newOwner);
         owner = newOwner;
         return true;

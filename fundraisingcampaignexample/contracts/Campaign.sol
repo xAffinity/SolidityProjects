@@ -1,4 +1,12 @@
-pragma solidity 0.4.19;
+//////////////////////////////////////////////////////////
+// For training purposes.
+// Solidity Contract Factory 
+// Module 4
+// Copyright (c) 2017, Rob Hitchens, all rights reserved.
+// Not suitable for actual use
+//////////////////////////////////////////////////////////
+
+pragma solidity ^0.4.6;
 
 import "./Stoppable.sol";
 
@@ -18,7 +26,7 @@ contract Campaign is Stoppable {
     mapping (address => FunderStruct) public funderStructs;
     
     modifier onlySponsor { 
-        require(msg.sender == sponsor);
+        if(msg.sender != sponsor) throw;
         _; 
     }
     
@@ -26,7 +34,7 @@ contract Campaign is Stoppable {
     event LogRefundSent(address funder, uint amount);
     event LogWithdrawal(address beneficiary, uint amount);
     
-    function Campaign(address campaignSponsor, uint campaignDuration, uint campaignGoal) public {
+    function Campaign(address campaignSponsor, uint campaignDuration, uint campaignGoal) {
         sponsor = campaignSponsor;
         deadline = block.number + campaignDuration;
         goal = campaignGoal;
@@ -54,9 +62,9 @@ contract Campaign is Stoppable {
         payable 
         returns(bool success) 
     {
-        require(msg.value > 0);
-        require(!isSuccess());
-        require(!hasFailed());
+        if(msg.value==0) throw;
+        if(isSuccess()) throw;
+        if(hasFailed()) throw;
         
         fundsRaised += msg.value;
         funderStructs[msg.sender].amountContributed += msg.value;
@@ -65,17 +73,16 @@ contract Campaign is Stoppable {
     }
     
     function withdrawFunds() 
-        public
         onlySponsor
         onlyIfRunning
         returns(bool success) 
     {
-        require(isSuccess());
+        if(!isSuccess()) throw;
         
         uint amount = this.balance;
         refunded += amount;
+        if(!owner.send(amount)) throw;
         LogWithdrawal(owner, amount);
-        sponsor.transfer(amount);
         return true;
     }
     
@@ -85,12 +92,12 @@ contract Campaign is Stoppable {
         returns(bool success) 
     {
         uint amountOwed = funderStructs[msg.sender].amountContributed - funderStructs[msg.sender].amountRefunded;
-        require(amountOwed > 0);
-        require(hasFailed());
+        if(amountOwed == 0) throw;
+        if(!hasFailed()) throw;
         
         funderStructs[msg.sender].amountRefunded += amountOwed;
+        if(!msg.sender.send(amountOwed)) throw;
         LogRefundSent(msg.sender, amountOwed);
-        msg.sender.transfer(amountOwed);
         return true;
     }
     
