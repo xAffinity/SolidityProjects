@@ -9,6 +9,10 @@ h1, h2, h3 {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
 }
 
+table, th, td {
+    border: 1px solid black;
+}
+
 code {
   display: block;
   margin: 20px 0 15px 0;
