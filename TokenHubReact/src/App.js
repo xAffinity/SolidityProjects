@@ -22,7 +22,8 @@ class App extends Component {
       tokenSymbol: undefined,
       tokenSupply: undefined,
       tokenHubAddress: null,
-      deployedTokenAddress: null
+      deployedTokenAddress: null,
+      fiatTokenAddress:null
     }
 
     this.handletokenName = this.handletokenName.bind(this);
@@ -71,10 +72,16 @@ class App extends Component {
         instance.createToken(this.state.tokenName,this.state.tokenSymbol, this.state.tokenSupply, {from: this.state.account, gas: 4000000})
         .then(txObj => {
           console.log('Transaction Receipt', txObj)
+          console.log('Token has been deployed!!!!')
           console.log('Deployed Token Address:', txObj.logs[0].args.token );
           this.setState({deployedTokenAddress: txObj.logs[0].args.token})
         })      
     })
+  }
+
+  setFiatTokenHandler = e => {
+    e.preventDefault();
+    this.setState({fiatTokenAddress: this.state.deployedTokenAddress})
   }
   instantiateContract() {
     /*
@@ -148,8 +155,17 @@ class App extends Component {
             <input type="text" name="Token Symbol" placeholder="Token Symbol" value={this.state.tokenSymbol} onChange={this.handletokenSymbol}/>
             <input type="number" name="Token Supply" placeholder="Token Supply" value={this.state.tokenSupply} onChange={this.handletokenSupply}/>
             <button onClick={this.deployTokenHandler}>Deploy Token</button>
+            <button onClick={this.setFiatTokenHandler}>Set Fiat Token</button>
           </form>
         <p>Deployed Token Contract Address: {this.state.deployedTokenAddress}</p>
+        <table>
+          <tr>
+            <th>Accounts</th>
+            <th>Addresses</th>
+            <th>{this.state.tokenName} Token Balance</th>
+          </tr>
+        </table>
+
       </div>
     );
   }
