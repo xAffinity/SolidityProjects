@@ -286,6 +286,16 @@ class App extends Component {
         })
      }
 
+     Token.at(this.state.deployedTokenAddress).balanceOf(this.state.tokenHubAddress).then(_balance => {
+        let balance = this.state.web3.fromWei(_balance.toString(10), "ether")
+        this.setState({deployedTokenBalance: balance})
+     })
+
+     this.state.fiatTokenInstance.balanceOf(this.state.tokenHubAddress).then(_balance =>{
+        let balance = this.state.web3.fromWei(_balance.toString(10), "ether")
+        this.setState({fiatTokenBalance: balance})
+     })
+
     })
   }
   
