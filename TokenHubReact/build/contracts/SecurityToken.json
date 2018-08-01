@@ -378,7 +378,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 64,
-        "sourceUnit": 596,
+        "sourceUnit": 666,
         "src": "26:143:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -392,10 +392,10 @@
               "id": 3,
               "name": "StandardBurnableToken",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 595,
+              "referencedDeclaration": 665,
               "src": "426:21:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_StandardBurnableToken_$595",
+                "typeIdentifier": "t_contract$_StandardBurnableToken_$665",
                 "typeString": "contract StandardBurnableToken"
               }
             },
@@ -405,12 +405,12 @@
           }
         ],
         "contractDependencies": [
-          399,
-          470,
-          513,
-          545,
-          595,
-          842
+          469,
+          540,
+          583,
+          615,
+          665,
+          912
         ],
         "contractKind": "contract",
         "documentation": "@title Security Token\n@dev The decimals are only for visualization purposes.\nAll the operations are done using the smallest and indivisible token unit,\njust as on Ethereum all the operations are done in wei.",
@@ -418,12 +418,12 @@
         "id": 63,
         "linearizedBaseContracts": [
           63,
-          595,
-          842,
-          470,
-          399,
-          513,
-          545
+          665,
+          912,
+          540,
+          469,
+          583,
+          615
         ],
         "name": "SecurityToken",
         "nodeType": "ContractDefinition",
@@ -831,7 +831,7 @@
                       "name": "totalSupply_",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 318,
+                      "referencedDeclaration": 388,
                       "src": "842:12:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -879,7 +879,7 @@
                         "name": "balances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 316,
+                        "referencedDeclaration": 386,
                         "src": "877:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -895,7 +895,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 857,
+                          "referencedDeclaration": 927,
                           "src": "886:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1020,7 +1020,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 857,
+                          "referencedDeclaration": 927,
                           "src": "946:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1074,7 +1074,7 @@
                       "name": "Transfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 544,
+                      "referencedDeclaration": 614,
                       "src": "925:8:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -1241,7 +1241,7 @@
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 64,
-        "sourceUnit": 596,
+        "sourceUnit": 666,
         "src": "26:143:0",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1255,10 +1255,10 @@
               "id": 3,
               "name": "StandardBurnableToken",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 595,
+              "referencedDeclaration": 665,
               "src": "426:21:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_StandardBurnableToken_$595",
+                "typeIdentifier": "t_contract$_StandardBurnableToken_$665",
                 "typeString": "contract StandardBurnableToken"
               }
             },
@@ -1268,12 +1268,12 @@
           }
         ],
         "contractDependencies": [
-          399,
-          470,
-          513,
-          545,
-          595,
-          842
+          469,
+          540,
+          583,
+          615,
+          665,
+          912
         ],
         "contractKind": "contract",
         "documentation": "@title Security Token\n@dev The decimals are only for visualization purposes.\nAll the operations are done using the smallest and indivisible token unit,\njust as on Ethereum all the operations are done in wei.",
@@ -1281,12 +1281,12 @@
         "id": 63,
         "linearizedBaseContracts": [
           63,
-          595,
-          842,
-          470,
-          399,
-          513,
-          545
+          665,
+          912,
+          540,
+          469,
+          583,
+          615
         ],
         "name": "SecurityToken",
         "nodeType": "ContractDefinition",
@@ -1694,7 +1694,7 @@
                       "name": "totalSupply_",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 318,
+                      "referencedDeclaration": 388,
                       "src": "842:12:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1742,7 +1742,7 @@
                         "name": "balances",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 316,
+                        "referencedDeclaration": 386,
                         "src": "877:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -1758,7 +1758,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 857,
+                          "referencedDeclaration": 927,
                           "src": "886:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1883,7 +1883,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 857,
+                          "referencedDeclaration": 927,
                           "src": "946:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1937,7 +1937,7 @@
                       "name": "Transfer",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 544,
+                      "referencedDeclaration": 614,
                       "src": "925:8:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
@@ -2083,5 +2083,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-08-01T07:25:33.367Z"
+  "updatedAt": "2018-08-01T15:18:59.110Z"
 }

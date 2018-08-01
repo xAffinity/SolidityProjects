@@ -8,6 +8,7 @@ contract TokenHub {
 	address[] public tokens;
 
 	event LogNewToken(address sender, address token, string tokenName, string tokenSymbol, uint256 tokenSupply );
+	event LogDistribution(address sender, address _fiataddress,address _tokenAddress, address[] _destination, uint256[] _fiatInvested, uint256 rate );
 
 	function getTokenCount()
 		public
@@ -26,6 +27,22 @@ contract TokenHub {
 		emit LogNewToken(msg.sender, deployedContract, _name, _symbol, _INITIAL_SUPPLY);
 		return deployedContract;
 	}
+
+	/**
+	 * @dev Test function to distribute fiat to test accounts
+	 */
+
+	function testSendOutFiat(address _fiatAddress, address[] _destination, uint256 amount)
+		public
+		returns(bool _success)
+	{
+		ERC20 fiat = ERC20(_fiatAddress);
+		for(uint256 i=0 ; i< _destination.length ;i++){
+			fiat.transfer(_destination[i], amount );
+		}
+
+		return true;
+	}
 	/**
 	 * @dev Coverts amount of Fiat Invested, extract funds from investors, sends back the investors the token amount)
 	 * @dev Investors must approve first before we can extract funds from them
@@ -43,9 +60,11 @@ contract TokenHub {
 		 ERC20 token = ERC20(_tokenAddress);
 
 		 for (uint256 i=0; i < _destination.length; i++) {
-		   fiat.transferFrom(_destination[i], msg.sender, _fiatInvested[i]);
+		   fiat.transferFrom(_destination[i], address(this), _fiatInvested[i]);
            token.transfer(_destination[i], _fiatInvested[i].mul(rate));
         }
+
+        emit LogDistribution(msg.sender, _fiatAddress, _tokenAddress, _destination, _fiatInvested, rate);
 
         return true;
 
