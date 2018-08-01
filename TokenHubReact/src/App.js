@@ -69,16 +69,40 @@ class App extends Component {
     this.setState({rate: e.target.value})
   }
 
-  handleInvestment = e => {
+  /*handleInvestment = e => {
     this.setState({investment: e.target.value})
   }
-  /*
-  handleInvestment1 = e =>{
-    const investment = this.state.investment
-    investment[0] = e.target.value
-    this.setState({investment: investment})
-  }*/
+  */
 
+  handleInvestment = e => {
+    const investments = this.state.investments
+    investments[0] = e.target.value
+    this.setState({investments: investments})
+  }
+  
+  handleInvestment1 = e =>{
+    const investments = this.state.investments
+    investments[1] = e.target.value
+    this.setState({investments: investments})
+  }
+
+  handleInvestment2 = e =>{
+    const investments = this.state.investments
+    investments[2] = e.target.value
+    this.setState({investments: investments})
+  }
+
+  handleInvestment3 = e =>{
+    const investments = this.state.investments
+    investments[3] = e.target.value
+    this.setState({investments: investments})
+  }
+ 
+  handleInvestment4 = e =>{
+    const investments = this.state.investments
+    investments[4] = e.target.value
+    this.setState({investments: investments})
+  }
  
 
   componentWillMount() {
@@ -189,20 +213,58 @@ class App extends Component {
 
   investmentHandler = e =>{
     e.preventDefault();
-    console.log(this.state.investment)
-    let investment = this.state.web3.toWei(this.state.investment, "ether");
+    console.log(this.state.investments)
+    let investment = this.state.web3.toWei(this.state.investments[0], "ether");
     this.state.fiatTokenInstance.approve(this.state.tokenHubAddress,investment,{from: this.state.accounts[0], gas: 4000000}).then(_approve=>{
       console.log(_approve);
     })
   }
 
+  investmentHandler1 = e => {
+    e.preventDefault();
+    console.log(this.state.investments)
+    let investment = this.state.web3.toWei(this.state.investments[1], "ether");
+    this.state.fiatTokenInstance.approve(this.state.tokenHubAddress,investment,{from: this.state.accounts[1], gas: 4000000}).then(_approve=>{
+      console.log(_approve);
+    })
+  }
+
+  investmentHandler2 = e => {
+    e.preventDefault();
+    console.log(this.state.investments)
+    let investment = this.state.web3.toWei(this.state.investments[2], "ether");
+    this.state.fiatTokenInstance.approve(this.state.tokenHubAddress,investment,{from: this.state.accounts[2], gas: 4000000}).then(_approve=>{
+      console.log(_approve);
+    })
+  }
+
+  investmentHandler3 = e => {
+    e.preventDefault();
+    console.log(this.state.investments)
+    let investment = this.state.web3.toWei(this.state.investments[3], "ether");
+    this.state.fiatTokenInstance.approve(this.state.tokenHubAddress,investment,{from: this.state.accounts[3], gas: 4000000}).then(_approve=>{
+      console.log(_approve);
+    })
+  }
+
+  investmentHandler4 = e => {
+    e.preventDefault();
+    console.log(this.state.investments)
+    let investment = this.state.web3.toWei(this.state.investments[4], "ether");
+    this.state.fiatTokenInstance.approve(this.state.tokenHubAddress,investment,{from: this.state.accounts[4], gas: 4000000}).then(_approve=>{
+      console.log(_approve);
+    })
+  }
+
+
   tokenDistributionHandler = e => {
     e.preventDefault();
-    console.log(this.state.investment)
-    //let investments = this.state.investment.map(e=>this.state.web3.toWei(e, "ether")); 
-      let  investment = this.state.web3.toWei(this.state.investment,"ether");
+    console.log(this.state.investments)
+    let investments = this.state.investments.map(e=>this.state.web3.toWei(e, "ether")); 
+      //let  investment = this.state.web3.toWei(this.state.investment,"ether");
     //console.log(investments)
-    this.state.tokenHubInstance.convertAndDistributeToken(this.state.fiatTokenAddress, this.state.deployedTokenAddress, [this.state.account], [investment], this.state.rate,{from: this.state.account, gas: 6000000})
+    //let accounts = [this.state.accounts[0], this.state.accounts[1], this.state.accounts[2],this.state.accounts[3]];
+    this.state.tokenHubInstance.convertAndDistributeToken(this.state.fiatTokenAddress, this.state.deployedTokenAddress, this.state.accounts, investments, this.state.rate,{from: this.state.account, gas: 6000000})
     .then(txObj=>{
       console.log(txObj);
       for(let i=0 ; i<this.state.accounts.length; i++){
@@ -341,27 +403,48 @@ class App extends Component {
               <th>{this.state.accounts[1]}</th>
               <th>{this.state.balances[1]}</th>
               <th>{this.state.tokenBalances[1]}</th>
-         
+              <th> 
+                <form>
+                  <input type="number" name="Contribute" placeholder="Invest Amount" value={this.state.investments[1]} onChange={this.handleInvestment1}/>
+                  <button onClick={this.investmentHandler1}>Invest!</button>
+                </form>
+              </th>
             </tr>
             <tr>
               <th>3</th>
               <th>{this.state.accounts[2]}</th>
               <th>{this.state.balances[2]}</th>
               <th>{this.state.tokenBalances[2]}</th>
-          
+              <th> 
+                <form>
+                  <input type="number" name="Contribute" placeholder="Invest Amount" value={this.state.investments[2]} onChange={this.handleInvestment2}/>
+                  <button onClick={this.investmentHandler2}>Invest!</button>
+                </form>
+              </th>
             </tr>
             <tr>
               <th>4</th>
               <th>{this.state.accounts[3]}</th>
               <th>{this.state.balances[3]}</th>
               <th>{this.state.tokenBalances[3]}</th>
-        
+              <th> 
+                <form>
+                  <input type="number" name="Contribute" placeholder="Invest Amount" value={this.state.investments[3]} onChange={this.handleInvestment3}/>
+                  <button onClick={this.investmentHandler3}>Invest!</button>
+                </form>
+              </th>
             </tr>
             <tr>
               <th>5</th>
               <th>{this.state.accounts[4]}</th>
               <th>{this.state.balances[4]}</th>
               <th>{this.state.tokenBalances[4]}</th>
+              <th> 
+                <form>
+                  <input type="number" name="Contribute" placeholder="Invest Amount" value={this.state.investments[4]} onChange={this.handleInvestment4}/>
+                  <button onClick={this.investmentHandler4}>Invest!</button>
+                </form>
+              </th>
             </tr>
             
           </tbody>
