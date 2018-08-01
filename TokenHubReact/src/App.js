@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TokenHubContract from '../build/contracts/TokenHub.json'
+import TokenContract from '../build/contracts/SecurityToken.json'
 import getWeb3 from './utils/getWeb3'
 
 import './css/oswald.css'
@@ -9,6 +10,7 @@ import './App.css'
 
 const contract = require('truffle-contract')
 const TokenHub = contract(TokenHubContract)
+const Token = contract(TokenContract)
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +25,7 @@ class App extends Component {
       tokenSupply: undefined,
       tokenHubAddress: null,
       deployedTokenAddress: null,
-      fiatTokenAddress:null
+      fiatTokenBalance: null
     }
 
     this.handletokenName = this.handletokenName.bind(this);
@@ -80,9 +82,26 @@ class App extends Component {
   }
 
   setFiatTokenHandler = e => {
-    e.preventDefault();
-    this.setState({fiatTokenAddress: this.state.deployedTokenAddress})
+      e.preventDefault();
+      Token.setProvider(this.state.web3.currentProvider)
+      let tokenInstance = Token.at(this.state.deployedTokenAddress);
+      console.log(this.state.account);
+      console.log(tokenInstance);
+
+      tokenInstance.totalSupply().then(_supply =>{
+        let supply = this.state.web3.fromWei(_supply.toString(10), "ether")
+        console.log('Total Fiat Supply:',supply); 
+      });
+
+      tokenInstance.balanceOf(this.state.tokenHubAddress).then(_balance =>{
+        let test = this.state.web3.fromWei(_balance.toString(10), "ether")
+        console.log(test);
+      }
+      );
+      
   }
+
+  
   instantiateContract() {
     /*
      * SMART CONTRACT EXAMPLE
@@ -158,12 +177,15 @@ class App extends Component {
             <button onClick={this.setFiatTokenHandler}>Set Fiat Token</button>
           </form>
         <p>Deployed Token Contract Address: {this.state.deployedTokenAddress}</p>
+        <p>Fiat Token Balance: {}</p>
         <table>
-          <tr>
-            <th>Accounts</th>
-            <th>Addresses</th>
-            <th>{this.state.tokenName} Token Balance</th>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Accounts</th>
+              <th>Addresses</th>
+              <th>{this.state.tokenName} Token Balance</th>
+            </tr>
+          </tbody>
         </table>
 
       </div>

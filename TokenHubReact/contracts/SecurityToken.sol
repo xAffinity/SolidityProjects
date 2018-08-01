@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-import "/home/terence/DAPPS/ICHX/node_modules/openzeppelin-solidity/contracts/token/ERC20/StandardBurnableToken.sol";
+import "/home/terence/DAPPS/SolidityProjects/TokenHubReact/node_modules/openzeppelin-solidity/contracts/token/ERC20/StandardBurnableToken.sol";
 
 
 /**
