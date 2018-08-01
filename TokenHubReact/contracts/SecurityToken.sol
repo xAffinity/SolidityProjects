@@ -18,12 +18,12 @@ contract SecurityToken is StandardBurnableToken {
   constructor(string _name, string _symbol, uint256 _INITIAL_SUPPLY) public {
     name = _name;
     symbol = _symbol;
-    INITIAL_SUPPLY = _INITIAL_SUPPLY;
+    INITIAL_SUPPLY = _INITIAL_SUPPLY * (10 ** uint256(decimals));
 
     /**
     * @dev Constructor that gives msg.sender all of existing tokens.
     */
-    totalSupply_ = INITIAL_SUPPLY * (10 ** uint256(decimals));
+    totalSupply_ = INITIAL_SUPPLY;
     balances[msg.sender] = INITIAL_SUPPLY;
     emit Transfer(address(0), msg.sender, INITIAL_SUPPLY);
   }

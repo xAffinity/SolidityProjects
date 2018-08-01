@@ -7,7 +7,7 @@ contract TokenHub {
 	using SafeMath for uint256;
 	address[] public tokens;
 
-	event LogNewToken(address sender, address token, string tokenName, string tokenSymbol, uint8 tokenSupply );
+	event LogNewToken(address sender, address token, string tokenName, string tokenSymbol, uint256 tokenSupply );
 
 	function getTokenCount()
 		public
@@ -17,7 +17,7 @@ contract TokenHub {
 		return tokens.length;
 	}
 
-	function createToken(string _name, string _symbol, uint8 _INITIAL_SUPPLY) 
+	function createToken(string _name, string _symbol, uint256 _INITIAL_SUPPLY) 
 		public
 		returns(address tokenContract)
 	{

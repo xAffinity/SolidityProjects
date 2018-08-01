@@ -19,13 +19,15 @@ class App extends Component {
     this.state = {
       web3: null,
       account: null,
-      ethbalance: null,
+      ethbalance: 0,
       tokenName: undefined,
       tokenSymbol: undefined,
-      tokenSupply: undefined,
+      tokenSupply: null,
       tokenHubAddress: null,
       deployedTokenAddress: null,
-      fiatTokenBalance: null
+      fiatTokenBalance: undefined,
+      fiatTokenSupply: undefined,
+      fiatTokenSymbol: undefined
     }
 
     this.handletokenName = this.handletokenName.bind(this);
@@ -71,6 +73,7 @@ class App extends Component {
   deployTokenHandler = e => {
     e.preventDefault();
     TokenHub.deployed().then(instance =>{
+        console.log('Creating token with:',this.state.tokenName, this.state.tokenSymbol, this.state.tokenSupply)
         instance.createToken(this.state.tokenName,this.state.tokenSymbol, this.state.tokenSupply, {from: this.state.account, gas: 4000000})
         .then(txObj => {
           console.log('Transaction Receipt', txObj)
@@ -87,17 +90,23 @@ class App extends Component {
       let tokenInstance = Token.at(this.state.deployedTokenAddress);
       console.log(this.state.account);
       console.log(tokenInstance);
+      console.log(this.state.tokenSupply);
 
       tokenInstance.totalSupply().then(_supply =>{
+        console.log(_supply);
         let supply = this.state.web3.fromWei(_supply.toString(10), "ether")
-        console.log('Total Fiat Supply:',supply); 
+        this.setState({fiatTokenSupply: supply});
+        console.log(supply);
       });
 
       tokenInstance.balanceOf(this.state.tokenHubAddress).then(_balance =>{
-        let test = this.state.web3.fromWei(_balance.toString(10), "ether")
-        console.log(test);
+        console.log(_balance);
+        let balance = this.state.web3.fromWei(_balance.toString(10), "ether")
+        this.setState({fiatTokenBalance: balance});
+        console.log(balance);
       }
       );
+      this.setState({fiatTokenSymbol: this.state.tokenSymbol})
       
   }
 
@@ -177,7 +186,8 @@ class App extends Component {
             <button onClick={this.setFiatTokenHandler}>Set Fiat Token</button>
           </form>
         <p>Deployed Token Contract Address: {this.state.deployedTokenAddress}</p>
-        <p>Fiat Token Balance: {}</p>
+        <p>Fiat Token Total Supply: {this.state.fiatTokenSupply} {this.state.fiatTokenSymbol}</p>
+        <p>Fiat Token Account Balance: {this.state.fiatTokenBalance} {this.state.fiatTokenSymbol}</p>
         <table>
           <tbody>
             <tr>
