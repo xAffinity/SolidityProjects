@@ -23,7 +23,7 @@ contract TokenHub {
 		returns(address tokenContract)
 	{
 		SecurityToken deployedContract = new SecurityToken(_name, _symbol, _INITIAL_SUPPLY);
-		tokens.push(tokenContract);
+		tokens.push(deployedContract);
 		emit LogNewToken(msg.sender, deployedContract, _name, _symbol, _INITIAL_SUPPLY);
 		return deployedContract;
 	}
